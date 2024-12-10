@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Usuários Cadastrados</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Usuários Cadastrados</h1>
+    <% if (users.length === 0) { %>
+      <p class="error-message">Nenhum usuário cadastrado ainda.</p>
+    <% } else { %>
+      <ul class="user-list">
+        <% users.forEach((user) => { %>
+          <li class="user-item">
+            <strong>Nickname:</strong> <%= user.nickname %> <br>
+            <strong>E-mail:</strong> <%= user.email %>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+    <a href="/cadastro" class="back-link">Voltar para Cadastro</a>
+    <a href="/menu" class="back-link">Voltar ao Menu</a>
+  </div>
+</body>
+</html>
