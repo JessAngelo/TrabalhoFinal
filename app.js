@@ -36,7 +36,6 @@ app.get("/", (req, res) => {
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
 
-  // Verifica se existe algum usuário
   if (!global.usuarios) {
     global.usuarios = [];
   }
@@ -67,10 +66,9 @@ app.get("/menu", (req, res) => {
 
 app.get("/usuarios", (req, res) => {
   if (!req.session.user) {
-    return res.redirect("/"); // Redireciona para a tela de login se não estiver logado
+    return res.redirect("/"); 
   }
 
-  // Renderiza a lista de usuários ou uma mensagem caso não haja usuários cadastrados
   const usuarios = global.usuarios || [];
   res.render("usuarios", {
     users: usuarios,
@@ -83,7 +81,6 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-// Inicialização do servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
