@@ -10,27 +10,25 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   session({
-    secret: "bate-papo-secreto",
+    secret: "bate-papo-secreto", 
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 30 * 60 * 1000 }, // 30 minutos
+    cookie: { maxAge: 30 * 60 * 1000 }, 
   })
 );
+
 app.use(express.static(path.join(__dirname, "public")));
 
-// Rotas
 const cadastroRoutes = require("./routes/cadastro");
 const chatRoutes = require("./routes/chat");
 
 app.use("/cadastro", cadastroRoutes);
 app.use("/chat", chatRoutes);
 
-// Tela de login
 app.get("/", (req, res) => {
   res.render("login", { error: null });
 });
@@ -38,7 +36,7 @@ app.get("/", (req, res) => {
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
 
-
+  
   const usuario = global.usuarios.find(
     (user) => user.nickname === username && user.senha === password
   );
@@ -65,7 +63,6 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-// Inicia o servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);

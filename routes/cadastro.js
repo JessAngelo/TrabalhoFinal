@@ -12,7 +12,9 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   const { nome, nascimento, nickname, senha } = req.body;
 
-  const usuarioExistente = global.usuarios.find((user) => user.nickname === nickname);
+  const usuarioExistente = global.usuarios.find(
+    (user) => user.nickname === nickname
+  );
 
   if (usuarioExistente) {
     return res.render("cadastro", {
