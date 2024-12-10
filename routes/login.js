@@ -10,7 +10,9 @@ router.post('/login', (req, res) => {
 
   if (username === 'admin' && password === '123456') {
     req.session.username = username;
-    res.cookie('lastAccess', new Date().toLocaleString());
+    res.cookie('lastAccess', new Date().toLocaleString('pt-BR', {
+       timeZone: 'America/Sao_Paulo',
+  }));
     res.redirect('/menu');
   } else {
     res.render('login', { error: 'Usuário ou senha inválidos' });

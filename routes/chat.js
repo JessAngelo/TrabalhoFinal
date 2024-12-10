@@ -35,10 +35,9 @@ router.post("/postar", (req, res) => {
   global.mensagens.push({
     usuario: req.session.user,
     mensagem,
-    destinatario: destinatario || null, 
-    dataHora: new Date().toLocaleString(),
+    destinatario: destinatario || null,
+    dataHora: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
   });
-
   res.redirect("/chat"); 
 });
 
