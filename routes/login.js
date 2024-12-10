@@ -11,9 +11,9 @@ router.post('/login', (req, res) => {
   if (username === 'admin' && password === '123456') {
     req.session.username = username;
     res.cookie('lastAccess', new Date().toLocaleString('pt-BR', {
-       timeZone: 'America/Sao_Paulo',
-  }));
-    res.redirect('/menu');
+        timeZone: 'America/Sao_Paulo',
+    }), { httpOnly: true, maxAge: 30 * 60 * 1000 }); // Opções adicionais para o cookie (exemplo de segurança e duração)
+       res.redirect('/menu');
   } else {
     res.render('login', { error: 'Usuário ou senha inválidos' });
   }
