@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Usuário</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="chat-container">
+    <h1>Cadastro de Usuários</h1>
+    
+    <% if (error) { %>
+      <p class="error-message"><%= error %></p>
+    <% } %>
+    
+    <form method="POST" action="/cadastro" class="chat-form">
+      <div class="input-group">
+        <label for="nome">Nome Completo</label>
+        <input type="text" id="nome" name="nome" placeholder="Nome Completo" required>
+      </div>
+      
+      <div class="input-group">
+        <label for="nascimento">Data de Nascimento</label>
+        <input type="date" id="nascimento" name="nascimento" required>
+      </div>
+      
+      <div class="input-group">
+        <label for="nickname">Nome de Usuário</label>
+        <input type="text" id="nickname" name="nickname" placeholder="Usuário" required>
+      </div>
+      
+      <div class="input-group">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" placeholder="Senha" required>
+      </div>
+      
+      <button type="submit" class="submit-button">Cadastrar</button>
+    </form>
+    
+    <h2>Usuários Cadastrados</h2>
+    <ul class="messages-list">
+      <% users.forEach(function(user) { %>
+        <li class="message-item"><%= user.nickname %></li>
+      <% }); %>
+    </ul>
+
+    <a href="/menu" class="back-link">Voltar ao Menu</a>
+  </div>
+</body>
+</html>

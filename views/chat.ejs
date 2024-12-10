@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+  <title>Chat</title>
+</head>
+<body>
+  <div class="chat-container">
+    <h1>Chat</h1>
+    <% if (error) { %>
+      <p class="error-message"><%= error %></p>
+    <% } %>
+
+    <form method="POST" action="/chat/postar" class="chat-form">
+      <div class="input-group">
+        <label for="destinatario">Usuário:</label>
+        <select name="destinatario" id="destinatario" required>
+          <option value="">Selecione...</option>
+          <% users.forEach(function(user) { %>
+            <% if (user.nickname !== sessionUser) { %>
+              <option value="<%= user.nickname %>"><%= user.nickname %></option>
+            <% } %>
+          <% }); %>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="mensagem">Mensagem:</label>
+        <textarea name="mensagem" id="mensagem" placeholder="Escreva sua mensagem..." required></textarea>
+      </div>
+
+      <button type="submit" class="submit-button">Enviar</button>
+    </form>
+
+    <div class="messages-container">
+      <h2>Mensagens</h2>
+      <ul class="messages-list">
+        <% mensagens.forEach(function(msg) { %>
+          <li class="message-item">
+            <strong><%= msg.usuario %>:</strong> <%= msg.mensagem %>
+            <% if (msg.destinatario) { %>
+              <span class="message-recipient">(Para: <%= msg.destinatario %>)</span>
+            <% } %>
+            <br>
+            <small class="message-time"><%= msg.dataHora %></small>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <a href="/menu" class="back-link">Voltar ao Menu</a>
+  </div>
+</body>
+</html>
